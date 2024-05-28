@@ -2,10 +2,17 @@ let express = require("express");
 const { BookModel } = require("../models/book-model");
 let bookRouter = express.Router();
 
-bookRouter.get("/books", (req, res) => {
-  return res.status(200).send({
-    message: "book fetched successfully",
-  });
+bookRouter.get("/books", async (req, res) => {
+  try {
+    let books = await BookModel.find();
+
+    return res.status(200).send({
+      totalBooks: books.length,
+      data: books,
+    });
+  } catch (error) {
+    return res.status(200).send({ error: error.message });
+  }
 });
 
 bookRouter.post("/books/create", async (req, res) => {
