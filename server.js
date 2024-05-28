@@ -1,13 +1,22 @@
 let express = require("express");
+require("dotenv").config();
+const { bookRouter } = require("./routers/book-router");
+const dbConnection = require("./db");
+
+let PORT = process.env.PORT;
 
 let app = express();
-// app.use(express.json());
-let PORT = 8080;
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  return res.status(200).send("<h1>hello world</h1>");
-});
+// Routes
+app.use("/", bookRouter);
 
-app.listen(`${PORT}`, () => {
-  console.log(`listening on ${PORT}`);
+app.listen(`${PORT}`, async () => {
+  try {
+    await dbConnection();
+    console.log(`db connection successful`);
+    console.log(`listening on ${PORT}`);
+  } catch (error) {
+    console.log(error);
+  }
 });
