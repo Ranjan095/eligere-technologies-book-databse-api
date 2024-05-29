@@ -9,6 +9,12 @@ This project involves creating a RESTful API for managing a simple book database
 - Middleware for permission checks
 - CRUD operations for book records
 
+## API Documentation
+
+For detailed API documentation, please visit the [Postman Documentation](https://documenter.getpostman.com/view/25728232/2sA3QterqM).
+
+
+
 ## Installation
 
 1. Clone the repository:
